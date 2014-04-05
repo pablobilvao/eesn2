@@ -5,9 +5,25 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eesn2backend/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eesn2backend/css/alertify.bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eesn2backend/css/alertify.core.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eesn2backend/css/alertify.default.css') }}">
+        {% block stylesheets %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('bundles/eesn2backend/js/jquery-1.10.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/eesn2backend/js/alertify.min.js') }}"></script>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        {% block javascript %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="container">
+
+            {% block body %}{% endblock %} 
+            
+        </div>
+
         {% block javascripts %}{% endblock %}
+        {% block scripts %}{% endblock %}
     </body>
 </html>

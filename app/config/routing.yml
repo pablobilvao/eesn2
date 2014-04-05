@@ -1,0 +1,5 @@
+eesn2_backend:
+    resource: "@Eesn2BackendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

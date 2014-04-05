@@ -1,0 +1,10 @@
+#profile{
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+}
+.legend{
+	text-align: center;
+}

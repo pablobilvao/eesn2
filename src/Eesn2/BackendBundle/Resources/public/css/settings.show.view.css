@@ -1,0 +1,90 @@
+#table-asignaturas, 
+#table-cargos, 
+#table-cursos,
+#table-divisiones,
+#table-normas,
+#table-estudiantes,
+#table-examenes,
+#table-turnos
+{
+	width: 50%;
+	height: 80%;
+}
+
+#ok{
+	position: absolute;
+	left: 85%;
+	bottom: 2%;
+}
+
+.nuevo{
+	position: absolute;
+	left: 95%;
+	top: 15.5%;
+}
+
+.image{
+	width: 20px;
+	height: 20px;
+	margin-right: 10%;
+}
+
+#Asignaturas-table_length,
+#Cargos-table_length, 
+#Cursos-table_length,
+#Divisiones-table_length,
+#Normas-table_length,
+#Estudiantes-table_length,
+#Examenes-table_length,
+#Turnos-table_length
+{
+	width: 40%;
+	position: absolute;
+	left: 63%;
+}
+
+.paginate_button, .paginate_active{
+	margin-right: 8px;
+	cursor: pointer;
+	border: 1px solid grey;
+	padding: 3px;
+	margin: 0px;
+	padding-left: 7px;
+	padding-right: 7px;
+	text-align: center;
+	color: white;
+}
+
+.paginate_active{
+	background-color: black;
+}
+
+.paginate_button{
+	background: rgba(11,9,10,0.8);
+}
+
+.paginate_button:hover, .paginate_active:hover{
+	text-decoration: none;
+	color: white;
+}
+
+.paginate_button:active{
+	color: red;
+}
+
+#Asignaturas-table_paginate,
+#Cargos-table_paginate, 
+#Cursos-table_paginate,
+#Divisiones-table_paginate,
+#Normas-table_paginate,
+#Estudiantes-table_paginate,
+#Examenes-table_paginate,
+#Turnos-table_paginate
+{
+	position: absolute;
+	bottom: 2%;
+}
+
+th:hover{
+	cursor: pointer;
+};

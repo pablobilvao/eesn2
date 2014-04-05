@@ -1,0 +1,40 @@
+{% extends '::base2.html.twig' %}
+
+{% block content %}
+	
+	<div id="profile">
+		<legend class="legend">Edita Tu Perfil: </legend>
+		<span> Nombre de Usuario: </span>
+		<input type="text" id="user" name="user" value="{{nameUser }}" disabled="disabled" />
+
+		<br />
+
+		<span style="margin-right: 5%;"> Password Vieja: </span>
+		<input type="password" id="passvieja" name="passvieja" value="" />
+
+		<br />
+
+		<span style="margin-right: 3%;"> Password Nueva: </span>
+		<input type="password" id="passnueva" name="passnueva" value="" />
+
+		<br />
+		<div id="confirm-pass">
+			<span> Confirmar Password </span>
+			<input type="password" id="confirmpass" name="confirmpass" value="" />
+		</div>
+		<br />
+
+		<button style="margin-right: 2%;" id="button-guardar" type="button" class="btn btn-primary">Guardar</button>
+		<img id="loading" style="width: 20px;height: 20px;" src="{{asset('bundles/eesn2backend/images/loading4.gif')}}" />
+
+	</div>
+
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{asset('bundles/eesn2backend/css/profile.view.css')}}">
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/profile.view.js')}}"></script>
+{% endblock %}

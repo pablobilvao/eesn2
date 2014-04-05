@@ -1,0 +1,24 @@
+{% extends '::base2.html.twig' %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{asset('bundles/eesn2backend/css/inscripcion.view.css')}}">
+
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/inscripcion.view.js')}}"></script>
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/inscripcion.controller.js')}}"></script>
+
+{% endblock %}
+
+{% block content %}
+	
+	<button id="button" type="button" class="btn btn-primary">Agregar Un Alumno</button>
+	
+	{% include 'Eesn2BackendBundle:Inscripcion:form-inscripcion.html.twig' %} 	
+	{% include 'Eesn2BackendBundle:Inscripcion:alumnos.html.twig' %}
+	{% include 'Eesn2BackendBundle:Inscripcion:padre.html.twig' %}
+	{% include 'Eesn2BackendBundle:Inscripcion:madre.html.twig' %}
+	{% include 'Eesn2BackendBundle:Inscripcion:tutor.html.twig' %}
+
+{% endblock %}
