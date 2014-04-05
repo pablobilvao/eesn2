@@ -1,0 +1,37 @@
+{% extends '::base2.html.twig' %}
+
+{% block content %}
+
+	{% include 'Eesn2BackendBundle:Settings:settings-button.html.twig' %}
+	
+	{% include 'Eesn2BackendBundle:Settings:table-asignaturas.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-cargos.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-cursos.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-divisiones.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-normas.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-estudiantes.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-examenes.html.twig' %}
+
+	{% include 'Eesn2BackendBundle:Settings:table-turnos.html.twig' %}
+
+	<div id="logica-button"></div>
+	<div id="jquery-script"></div>
+
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{asset('bundles/eesn2backend/css/settings.new.view.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset('bundles/eesn2backend/css/settings.show.view.css')}}">
+
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/datatable.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/settings.show.view.js')}}"></script>
+{% endblock %}
