@@ -4,117 +4,23 @@
 
 	{% include 'Eesn2BackendBundle:Settings:settings-button.html.twig' %}
 	
-	<div id="settings-welcome">
-		<legend>Bienvenido/a Al Sistema</legend>
-		<span>	
-			<p>
-				Para poder utilizar este sistema debe configurar la base de datos, no se preocupe, es muy sencillo.
-			</p>
-			<p>
-				Lo que debe hacer es cerrar esta ventana haciendo click en el boton <strong>"CERRAR"</strong> que se encuentra debajo.
-			</p>
-			<p>
-				Luego debe hacerle click a los botones que acontinuación aparecerán, lo único que debe hacer es completar con lo que se le ira pidiendo.
-			</p>
-			<p>
-				¡GRACIAS POR UTILIZAR NUESTRO SISTEMA!
-			</p>
-		</span>
-		<br />
+	{% include 'Eesn2BackendBundle:Settings:settings-welcome.html.twig' %}	
 
-		<a id="cerrar" href="#" rel="modal:close" class="btn">CERRAR</a>
-	</div>
+	{% include 'Eesn2BackendBundle:Settings:asignaturas.html.twig' %}
 
-	<div id="asignaturas">
-		<span>Cuantas Asignaturas Desea Registrar?</span>
-		<input class="number" type="number" min="1" max="15" value="" id="cantAsignaturas" /> 
+	{% include 'Eesn2BackendBundle:Settings:cargos.html.twig' %}
 
-		<div id="asigs">
-			<span>Escriba Las Asignaturas, Separadas Por Comas</span>
-			<input placeholder="Asignaturas" type="text" id="asig" value="" />
-		</div>
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
+	{% include 'Eesn2BackendBundle:Settings:cursos.html.twig' %}
 
+	{% include 'Eesn2BackendBundle:Settings:divisiones.html.twig' %}
 
-	</div>
+	{% include 'Eesn2BackendBundle:Settings:normas.html.twig' %}
 
-	<div id="cargos">
-		<span>Cuantos Cargos(Docentes) Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantCargos" /> 
+	{% include 'Eesn2BackendBundle:Settings:t-estudiantes.html.twig' %}
 
-		<span>Escriba Los Cargos, Separados Por Comas</span>
-		<input placeholder="Cargos" type="text" id="carg" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
+	{% include 'Eesn2BackendBundle:Settings:t-examenes.html.twig' %}
 
-	<div id="cursos">
-		<span>Cuantos Cursos Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantCursos" /> 
-		<br />
-		<span>Escriba Los Cursos, Separados Por Comas</span>
-		<input placeholder="Ejemplo: 1año, 2°, 3ro" type="text" id="curs" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
-
-	<div id="divisiones">
-		<span>Cuantas Divisiones Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantDivisiones" /> 
-		<br />
-		<span>Escriba Las Divisiones, Separadas Por Comas</span>
-		<input placeholder="Ejemplo: 1°, 2da, 3ro" type="text" id="divs" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
-
-	<div id="normas">
-		<span>Cuantas Normas(Legales) Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantNormas" /> 
-
-		<span>Escriba Las Normas, Separadas Por Comas</span>
-		<input placeholder="Ejemplo: Dec. 5923/00 MEJE" type="text" id="norm" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
-
-	<div id="t-estudiantes">
-		<span>Cuantos Tipos de Estudiantes Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantT-Estudiantes" /> 
-
-		<span>Escriba Los Tipos, Separados Por Comas</span>
-		<input placeholder="Ejemplo: Regulares, Libres" type="text" id="t-est" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
-
-	<div id="t-examenes">
-		<span>Cuantos Tipos de Examenes Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantT-exam" /> 
-
-		<span>Escriba Los Tipos, Separados Por Comas</span>
-		<input placeholder="Ejemplo: Final, Complementario" type="text" id="t-exa" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
-
-	<div id="turnos">
-		<span>Cuantos Turnos Desea Registrar?</span>
-		<input class="number" type="number" min="1" value="" id="cantTurnos" /> 
-		<br />
-		<span>Escriba Los Turnos, Separados Por Comas</span>
-		<input placeholder="Ejemplo: mañana, tarde, noche" type="text" id="turn" value="" />
-		
-		<br />
-		<a id="cerrar" href="#close-modal" rel="modal:close" class="btn">CERRAR</a>
-	</div>
+	{% include 'Eesn2BackendBundle:Settings:turnos.html.twig' %}
 
 {% endblock %}
 

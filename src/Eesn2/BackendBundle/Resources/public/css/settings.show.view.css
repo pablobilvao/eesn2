@@ -85,6 +85,6 @@
 	bottom: 2%;
 }
 
-th:hover{
+th:hover, .edit-able{
 	cursor: pointer;
 };

@@ -28,11 +28,16 @@ function generarScript(entorno){
 
 	var ids = traerRegistrosIds(entorno);
 	$.each(ids,function(index, value){
-		script += '$(".edit-'+index+'").click(function(){editarRegistro('+index+',"'+entorno+'");});';
+		//script += '$(".edit-'+index+'").click(function(){editarRegistro('+index+',"'+entorno+'");});';
 		script += '$(".remove-'+index+'").click(function(){var confim = confirm("¿Desea Confirmar La Eliminación de éste Registro en '+entorno+'?");if(confim){borrarRegistro('+index+',"'+entorno+'");}});';
 	});
 
 	script += '</script>';
+
+	$.each($("#"+entorno+"-tbody").eq(0).children(),function(index, value){
+		$(value).children().eq(1).editable();
+	});
+
 	contenedor.html(script);
 	
 	if($("#"+entorno+"-table_wrapper").length == 0){
@@ -96,12 +101,14 @@ function realizarPeticion(entorno){
 function implantarEnTabla(object, entorno){
 	var html = '';
 	var contenedor = $("#"+entorno+"-tbody");
+	contenedor.empty();
 	$.each(object, function(index, value){
 		if(!isNaN(index)){
-			html += '<tr><td>'+index+'</td><td>'+value+'</td><td><a class="edit-'+index+'" href="#"><img title="editar" class="image" src="/bundles/eesn2backend/images/editar.png" /></a><a class="remove-'+index+'" href="#"><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></a></td>';
+			html += '<tr><td>'+index+'</td><td class="edit-able">'+value+'</td><td><a class="remove-'+index+'" href="#"><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></a></td>';
 		}
 	});
 
+	//var buttonEdit = <a class="edit-'+index+'" href="#"><img title="editar" class="image" src="/bundles/eesn2backend/images/editar.png" /></a>;
 	contenedor.html(html);
 	generarScript(entorno);
 
@@ -116,7 +123,8 @@ function borrarRegistro(id, entorno){
 		data: {'id':id, 'entorno':entorno},
 		success: function(res){
 			if(res.mensaje){
-				alertify.success('El registro ha sido borrado, Solo debe hacer click en Guardar');
+				alertify.success('El registro ha sido borrado');
+				realizarPeticion(entorno);
 			}else{
 				alertify.error('No se pudo borrar el registro');
 			}
@@ -125,7 +133,11 @@ function borrarRegistro(id, entorno){
 }
 
 function editarRegistro(id, entorno){
-	alertify.success(entorno);
+	//var input = $("#"+entorno+"-tbody").children().eq(0).children().eq(1).editable();
+	//input.click()
+	
+
+
 	return false;
 }
 
