@@ -28,8 +28,8 @@ function generarScript(entorno){
 
 	var ids = traerRegistrosIds(entorno);
 	$.each(ids,function(index, value){
-		script += '$("#edit-'+index+'").click(function(){editarRegistro("'+index+'","'+entorno+'");});';
-		script += '$("#remove-'+index+'").click(function(){var confim = confirm("¿Desea Confirmar La Eliminación de éste Registro en '+entorno+'?");if(confim){borrarRegistro('+index+',"'+entorno+'");}});';
+		script += '$(".edit-'+index+'").click(function(){editarRegistro('+index+',"'+entorno+'");});';
+		script += '$(".remove-'+index+'").click(function(){var confim = confirm("¿Desea Confirmar La Eliminación de éste Registro en '+entorno+'?");if(confim){borrarRegistro('+index+',"'+entorno+'");}});';
 	});
 
 	script += '</script>';
@@ -98,7 +98,7 @@ function implantarEnTabla(object, entorno){
 	var contenedor = $("#"+entorno+"-tbody");
 	$.each(object, function(index, value){
 		if(!isNaN(index)){
-			html += '<tr><td>'+index+'</td><td>'+value+'</td><td><a id="edit-'+index+'" href="#"><img title="editar" class="image" src="/bundles/eesn2backend/images/editar.png" /></a><a id="remove-'+index+'" href="#"><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></a></td>';
+			html += '<tr><td>'+index+'</td><td>'+value+'</td><td><a class="edit-'+index+'" href="#"><img title="editar" class="image" src="/bundles/eesn2backend/images/editar.png" /></a><a class="remove-'+index+'" href="#"><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></a></td>';
 		}
 	});
 
@@ -125,7 +125,8 @@ function borrarRegistro(id, entorno){
 }
 
 function editarRegistro(id, entorno){
-	alertify.success(id +'ENTORNO: '+entorno);
+	alertify.success(entorno);
+	return false;
 }
 
 function returnConfig(){
