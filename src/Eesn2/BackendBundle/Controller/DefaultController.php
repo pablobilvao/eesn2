@@ -176,4 +176,61 @@ class DefaultController extends Controller
         
         return $repositorio;
     }
+
+    /**
+     * @Route("/actualizarRegistro")
+     * @Method("POST")
+     */
+
+    function actualizarRegistroAction(){
+        $request = Request::createFromGlobals();
+        $response = new Response();
+        $response->headers->set('Content-Type', 'json');
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $id = $request->request->get('pk');
+        $newValue = $request->request->get('newValue');
+        $entorno = $request->request->get('entorno');
+
+        $repository = $this->devolverRepository($doctrine, $entorno);
+        $registro = $this->setearValor($repository->find($id), $entorno, $newValue);
+
+        $doctrine->persist($registro);
+        $doctrine->flush();
+
+        $response->setContent(json_encode(array('mensaje' => true)));
+
+        return $response;
+    }
+
+    public function setearValor($object, $entorno, $newValue){
+        switch ($entorno) {
+            case 'Asignaturas':
+                $object->setAsignatura($newValue);
+                break;
+            case 'Cargos':
+                $object->setCargo($newValue);
+                break;
+            case 'Cursos':
+                $object->setCurso($newValue);
+                break;
+            case 'Divisiones':
+                $object->setDivision($newValue);
+                break;
+            case 'Normas':
+                $object->setNorma($newValue);
+                break;
+            case 'Estudiantes':
+                $object->setTipo($newValue);
+                break;
+            case 'Examenes':
+                $object->setTipo($newValue);
+                break;
+            case 'Turnos':
+                $object->setTurno($newValue);
+                break;
+        }
+        
+        return $object;
+    }
 }

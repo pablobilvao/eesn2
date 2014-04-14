@@ -1,0 +1,32 @@
+{% extends '::base2.html.twig' %}
+
+{% block content %}
+	
+	<div id="table">
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="Estudiantes-table">
+			<thead>
+				<tr>
+					<th> # </th>
+					<th> Tipo </th>
+					<th> Acciones </th>
+				</tr>
+			</thead>
+			<tbody id="Estudiantes-tbody">
+				
+			</tbody>
+		</table>
+	</div>
+
+	<div id="jquery-script"></div>
+
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{asset('bundles/eesn2backend/css/table.css')}}">
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/jquery.dataTables.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/estudiantes.js')}}"></script>
+	<script type="text/javascript" src="{{asset('bundles/eesn2backend/js/paginate.js')}}"></script>
+{% endblock %}

@@ -41,7 +41,6 @@ class LoginController extends Controller
 	    	$pass = base64_decode($request->request->get('pass'));
 	    	$repository = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Users');
 	    	$my_user = $repository->findOneBy(array('user'=>$user,'pass'=> base64_encode($pass)));
-	    	
 	    	if(count($my_user) == 1){
 	    		$response->setContent(json_encode(array('logger' => 'ok')));
 	    		session_start();

@@ -1,0 +1,47 @@
+#table{
+	width: 60%;
+	height: 80%;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+}
+
+.pagination{
+	position: absolute;
+	top: 70%;
+}
+
+.image{
+	width: 20px;
+	height: 20px;
+	margin-right: 10%;
+}
+
+#Asignaturas-table_length,
+#Cargos-table_length,
+#Cursos-table_length,
+#Divisiones-table_length,
+#Normas-table_length,
+#Estudiantes-table_length,
+#Examenes-table_length,
+#Turnos-table_length
+{
+	width: 25%;
+	position: absolute;
+	left: 75%;
+}
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+}
+ 
+table.table thead .sorting { background: url('../images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+ 
+table.table thead .sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }

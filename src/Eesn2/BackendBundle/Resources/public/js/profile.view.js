@@ -1,4 +1,4 @@
-confirmPassHide();
+//confirmPassHide();
 loadingHide();
 
 if($("#confirmpass").val() == ''){
@@ -6,26 +6,26 @@ if($("#confirmpass").val() == ''){
 }
 
 $("#passvieja").change(function(){
-	if($("#passnueva").val() != "" && $("#passvieja").val() != ""){
-		confirmPassShow();
+	if($("#passnueva").val() != "" && $("#passvieja").val() != "" && $("#confirmpass").val() != ""){
+		buttonEnabled();
 	}else{
-		noValid();
+		buttonDisabled();
 	}
 	return true;
 });
 
 $("#passnueva").change(function(){
-	if($("#passnueva").val() != "" && $("#passvieja").val() != ""){
-		confirmPassShow();
+	if($("#passnueva").val() != "" && $("#passvieja").val() != "" && $("#confirmpass").val() != ""){
+		buttonEnabled();
 	}else{
-		noValid();
+		buttonDisabled();
 	}
 
 	return true;
 });
 
 $("#confirmpass").change(function(){
-	if($("#confirmpass").val() != ""){
+	if($("#confirmpass").val() != "" && $("#passnueva").val() != "" && $("#passvieja").val() != ""){
 		buttonEnabled();
 	}else{
 		buttonDisabled();

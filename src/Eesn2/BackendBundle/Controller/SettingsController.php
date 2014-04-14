@@ -140,4 +140,174 @@ class SettingsController extends Controller
 
 		return $arrayNew;
 	}
+
+	/**
+	 * @Route("/asignaturas")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.asignaturas.html.twig")
+	 */
+
+	public function asignaturasAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Asignaturas", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.asignaturas.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/cargos")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.cargos.html.twig")
+	 */
+
+	public function cargosAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Cargos", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.cargos.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/cursos")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.cursos.html.twig")
+	 */
+
+	public function cursosAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Cursos", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.cursos.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/divisiones")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.divisiones.html.twig")
+	 */
+
+	public function divisionesAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Divisiones", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.divisiones.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/normas")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.normas.html.twig")
+	 */
+
+	public function normasAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Normas", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.normas.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/estudiantes")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.estudiantes.html.twig")
+	 */
+
+	public function estudiantesAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Tipos de Estudiantes", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.estudiantes.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/tipoExamenes")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.examenes.html.twig")
+	 */
+
+	public function examenesAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Tipo de Examenes", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.examenes.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	/**
+	 * @Route("/turnos")
+	 * @Method("GET")
+	 * @Template("Eesn2BackendBundle:Settings:settings.turnos.html.twig")
+	 */
+
+	public function turnosAction(){
+		$login = $this->verificarLogin();
+		$settingsOK = $this->verificarSettings();
+		if($login->getAutorizado()){
+			$retornar = array("sectionTitle"=>"Settings Turnos", "nameUser"=>$login->getUser());
+			if(!$settingsOK){
+				return $retornar;
+			}else{
+				return $this->render('Eesn2BackendBundle:Settings:settings.turnos.html.twig', $retornar);
+			}
+		}else{
+			return $this->redirect('login');
+		}
+	}
+
+	
 }
