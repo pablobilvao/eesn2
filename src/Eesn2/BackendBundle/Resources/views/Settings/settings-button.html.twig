@@ -1,13 +1,30 @@
 <div id="settings">
-		<legend>Configuración Del Sistema: </legend>
-		<button id="button1" type="button" class="btn btn-warning">Asignaturas</button>
-		<button id="button2" type="button" class="btn btn-warning">Cargos</button>
-		<button id="button3" type="button" class="btn btn-warning">Cursos</button><br />
-		<button id="button4" type="button" class="btn btn-warning">Divisiones</button>
-		<button id="button5" type="button" class="btn btn-warning">Normas Legales</button>
-		<button id="button6" type="button" class="btn btn-warning">Tipos de Estudiantes</button><br />
-		<button id="button7" type="button" class="btn btn-warning">Tipos de Examenes</button>
-		<button id="button8" type="button" class="btn btn-warning">Turnos</button><br />
-		<button id="guardar" class="btn btn-success">Guardar</button>
-		<img style="margin-top: 5%; width: 30px;height: 30px;" id="loading" src="{{asset('bundles/eesn2backend/images/loading4.gif')}}" />
-	</div>
+	<legend>Configuración Del Sistema: </legend>
+	{% if asignaturas  %}
+		<button id="button1" entorno="asignaturas" type="button" class="btn btn-warning">Asignaturas</button>
+	{% endif %}
+	{% if cargos %}
+		<button id="button2" entorno="cargos" type="button" class="btn btn-warning">Cargos</button>
+	{% endif %}
+	{% if cursos %}
+		<button id="button3" entorno="cursos" type="button" class="btn btn-warning">Cursos</button><br />
+	{% endif %}
+	{% if divisiones %}
+		<button id="button4" entorno="divisiones" type="button" class="btn btn-warning">Divisiones</button>
+	{% endif %}
+	{% if normas %}
+		<button id="button5" entorno="normas" type="button" class="btn btn-warning">Normas Legales</button>
+	{% endif %}
+	{% if estudiantes %}
+		<button id="button6" entorno="estudiantes" type="button" class="btn btn-warning">Tipos de Estudiantes</button><br />
+	{% endif %}
+	{% if examenes %}
+		<button id="button7" entorno="examenes" type="button" class="btn btn-warning">Tipos de Examenes</button>
+	{% endif %}
+	{% if turnos %}
+		<button id="button8" entorno="turnos" type="button" class="btn btn-warning">Turnos</button><br />
+	{% endif %}
+	
+	<br /><button id="guardar" class="btn btn-success">Guardar</button>
+	<img style="margin-top: 5%; width: 30px;height: 30px;" id="loading" src="{{asset('bundles/eesn2backend/images/loading4.gif')}}" />
+</div>

@@ -1,8 +1,10 @@
 {% extends '::base2.html.twig' %}
 
 {% block content %}
-	
 	<div id="table">
+		<div id="nuevoRegistro">
+			<img title="nuevo" class="image" src="/bundles/eesn2backend/images/nuevo.png" /><br />
+		</div>
 		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="Cargos-table">
 			<thead>
 				<tr>
@@ -18,6 +20,8 @@
 	</div>
 
 	<div id="jquery-script"></div>
+
+	{% include 'Eesn2BackendBundle:Settings:cargos.html.twig' %}
 
 {% endblock %}
 

@@ -6,6 +6,19 @@
 	left: 25%;
 }
 
+.edit-able{
+	text-decoration:none;
+	cursor: default;
+}
+
+.edit-able:hover{
+	text-decoration: none;
+}
+
+.editable-click{
+	cursor: pointer;
+}
+
 .pagination{
 	position: absolute;
 	top: 70%;
@@ -15,6 +28,7 @@
 	width: 20px;
 	height: 20px;
 	margin-right: 10%;
+	cursor: pointer;
 }
 
 #Asignaturas-table_length,

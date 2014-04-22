@@ -1,26 +1,49 @@
 <div id="padre">
-	<legend>Padre: </legend>
-	<span>Nombre:</span>
-	<input value="" type="text" name="Pnombre" id="Pnombre" />
-	<span> Apellido:</span>
-	<input value="" type="text" name="Papellido" id="Papellido" />
-	<span> Nacionalidad:</span>
-	<input value="" type="text" name="Pnacionalidad" id="Pnacionalidad" />
-
-	<span>Vive?</span>
-	<select id="Pvive" >
-		<option value="0">NO</option>
-		<option value="1">SI</option>
-	</select>
-	<br />
-
-	<div id="Pvive-si">
-		<span>Dni:</span>
-		<input value="" type="text" name="Pdni" id="Pdni" />
-		<span>Profesion:</span>
-		<input value="" type="text" name="Pprofesion" id="Pprofesion" />
+	<div class="row-fluid">
+		<div class="span12"><legend>Padre: </legend></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span>Nombre:</span></div>
+		<div class="span3"><input value="" type="text" name="Pnombre" id="Pnombre" /></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span> Apellido:</span></div>
+		<div class="span3"><input value="" type="text" name="Papellido" id="Papellido" /></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span> Nacionalidad:</span></div>
+		<div class="span3"><input value="" type="text" name="Pnacionalidad" id="Pnacionalidad" /></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span>Vive?</span></div>
+		<div class="span3">
+			<select id="Pvive" >
+				<option selected="selected" value="0">NO</option>
+				<option value="1">SI</option>
+			</select>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="Pvive-si">
+			<div class="span1"></div>
+			<div class="span3"><span>Dni:</span></div>
+			<div class="span3"><input value="" type="text" name="Pdni" id="Pdni" /></div>
+		</div>
 	</div>
 
-	<br />
-	<button type="button" class="button4 btn btn-primary">Volver</button>
+	<div class="row-fluid">
+		<div class="Pvive-si">	
+			<div class="span1"></div>
+			<div class="span3"><span>Profesion:</span></div>
+			<div class="span3"><input value="" type="text" name="Pprofesion" id="Pprofesion" /></div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12"><a type="button" rel="modal:close" class="button4 btn btn-primary">Volver</a></div>
+	</div>
 </div>

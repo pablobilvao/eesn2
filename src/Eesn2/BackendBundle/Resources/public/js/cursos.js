@@ -1,10 +1,14 @@
 $(document).ready(function(){
 	cargarTabla();
+	$("#cursos").hide();
 });
 
 function cargarTabla(){
 	var html = '';
 	var contenedor = $("#Cursos-tbody");
+	if($("#Cursos-table_wrapper").length != 0){
+		$('#Cursos-table').dataTable().fnDestroy();
+	}
 	contenedor.empty();
 	$.ajax({
 		url: 'getDatosTable',
@@ -14,7 +18,7 @@ function cargarTabla(){
 		success: function(cursos){
 			$.each(cursos, function(index, value){
 				if(!isNaN(index)){
-					html += '<tr><td>'+index+'</td><td><a pk='+index+' class="edit-able" href="">'+value+'</a></td><td><a class="remove-'+index+'" onclick=eliminarRegistro('+index+'); href="#"><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></a></td>';
+					html += '<tr><td>'+index+'</td><td><a pk='+index+' class="edit-able" >'+value+'</a></td><td><span class="remove-'+index+'" onclick=eliminarRegistro('+index+'); ><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></span><span class="editar-'+index+'" onclick=configurarEditable('+index+'); ><img title="editar" class="image" src="/bundles/eesn2backend/images/edit.png" /></span></td>';
 				}
 			});
 			contenedor.html(html);
@@ -88,30 +92,71 @@ function configurarDataTable(){
 			'width':'50px', 
 		});
 
-	$('.edit-able').editable({
+	//configurarEditable();
+
+	var paginador = $("#Cursos-table_paginate");
+	paginador.addClass('pagination pagination-small');
+}
+
+function configurarEditable(id){
+	$('.edit-able[pk='+id+']').addClass('editable-click');
+	$('.edit-able[pk='+id+']').editable({
 	    send: 'never',
 	    success: function(respon, newValue) {
-	    	var pk = traerPK();
 	    	$.ajax({
 	    		url: 'actualizarRegistro',
 				type: 'POST',
 				dataType: 'json',
-				data: {'pk':pk, 'newValue':newValue, entorno: 'Cursos'},
+				data: {'pk':id, 'newValue':newValue, entorno: 'Cursos'},
 				success: function(res){
 					if(res.mensaje){
 						alertify.success('El registro ha sido actualizado');
 					}else{
 						alertify.error('No se pudo actualizar el registro');
 					}
+					$('.edit-able[pk='+id+']').removeClass('editable-click').css({
+						'cursor':'default',
+						'text-decoration':'none',
+					});
 				}
 	    	});
 	    }        
 	});
-
-	var paginador = $("#Cursos-table_paginate");
-	paginador.addClass('pagination pagination-small');
 }
 
-function traerPK(){
-	return $('.editable-open').attr('pk');
-}
+$("#nuevoRegistro").click(function(){
+	$("#cursos").modal({
+		fadeDuration:500,
+		fadeDelay:.5
+	});
+	$("#cerrar").text('Guardar');
+});
+
+$("#cerrar").click(function(){
+	var cantCursos = $("#cantCursos").val();
+	var cursos = $("#curs").val().split(',');
+
+	if(cursos == 0){
+		alertify.error('Debe Ingresar Al Menos Un Curso');
+		return false;
+	}
+	if(cursos.length != cantCursos){
+		alertify.error('Número de Cursos y Cantidad de Cursos Ingresados son Distintos');
+		return false;
+	}
+
+	$.ajax({
+		url: 'guardarSettings',
+		data: {'cursos': cursos},
+		type: 'POST',
+		dataType: 'json',
+		success: function(res){
+			if(res.guardado == true){
+				alertify.success("Registro Creado");
+				cargarTabla();
+			}else{
+				alertify.error("Error Al Guardar El Registro");
+			}
+		}
+	});
+});

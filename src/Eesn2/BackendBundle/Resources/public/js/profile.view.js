@@ -1,6 +1,7 @@
 //confirmPassHide();
 loadingHide();
 
+/*
 if($("#confirmpass").val() == ''){
 	buttonDisabled();
 }
@@ -32,7 +33,7 @@ $("#confirmpass").change(function(){
 	}
 	return true;
 });
-
+*/
 $("#button-guardar").click(function(){
 	if(!validarMin($("#user").val())){
 		alertify.error("El Usuario Debe Tener Minimo 6 Caracteres");

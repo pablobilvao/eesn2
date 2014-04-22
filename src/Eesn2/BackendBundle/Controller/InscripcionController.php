@@ -17,7 +17,7 @@ class InscripcionController extends Controller
 		$login = $this->verificarLogin();
 		$settingsOk = $this->verificarSettings();
 		if($login->getAutorizado()){
-			if($settingsOk){
+			if($settingsOk['validado']){
 				return array('nameUser'=>$login->getUser(), 'sectionTitle'=>'Inscripcion');
 			}else{
 				return $this->redirect('settings');

@@ -1,24 +1,40 @@
 <div id="madre">
-	<legend>Madre: </legend>
-	<span>Nombre:</span>
-	<input value="" type="text" name="Mnombre" id="Mnombre" />
-	<span> Apellido:</span>
-	<input value="" type="text" name="Mapellido" id="Mapellido" />
-	<span> Nacionalidad:</span>
-	<input value="" type="text" name="Mnacionalidad" id="Mnacionalidad" />
-
-	<span>Vive?</span>
-	<select id="Mvive" >
-		<option value="0">NO</option>
-		<option value="1">SI</option>
-	</select>
-	<br />
-
-	<div id="Mvive-si">
-		<span>Dni:</span>
-		<input value="" type="text" name="Mdni" id="Mdni" />
+	<div class="row-fluid">
+		<div class="span12"><legend>Madre: </legend></div>
 	</div>
-	
-	<br />
-	<button type="button" class="button4 btn btn-primary">Volver</button>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span>Nombre:</span></div>
+		<div class="span3"><input value="" type="text" name="Mnombre" id="Mnombre" /></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span> Apellido:</span></div>
+		<div class="span3"><input value="" type="text" name="Mapellido" id="Mapellido" /></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span> Nacionalidad:</span></div>
+		<div class="span3"><input value="" type="text" name="Mnacionalidad" id="Mnacionalidad" /></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span3"><span>Vive?</span></div>
+		<div class="span3">
+			<select id="Mvive" >
+				<option selected="selected" value="0">NO</option>
+				<option value="1">SI</option>
+			</select>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div id="Mvive-si">
+			<div class="span1"></div>
+			<div class="span3"><span>Dni:</span></div>
+			<div class="span3"><input value="" type="text" name="Mdni" id="Mdni" /></div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12"><a type="button" rel="modal:close" class="button4 btn btn-primary">Volver</a></div>
+	</div>
 </div>

@@ -30,10 +30,13 @@ class SettingsController extends Controller
 		$settingsOK = $this->verificarSettings();
 		if($login->getAutorizado()){
 			$retornar = array("sectionTitle"=>"Settings", "nameUser"=>$login->getUser());
-			if(!$settingsOK){
+			if(!$settingsOK['validado']){
+				foreach ($settingsOK as $key => $config) {
+					$retornar[$key] = $config;
+				}
 				return $retornar;
 			}else{
-				return $this->render('Eesn2BackendBundle:Settings:showSettings.html.twig', $retornar);
+				return $this->redirect('index');
 			}
 		}else{
 			return $this->redirect('login');
@@ -46,35 +49,116 @@ class SettingsController extends Controller
 	 */
 
 	public function guardarSettingsAction(){
-		
 		$request = Request::createFromGlobals();
     	$method = $request->getMethod(); 
     	$response = new Response();
 	    $response->headers->set('Content-Type', 'json');
 	    $doctrine = $this->getDoctrine()->getManager();
 	    
-	    $asignaturas = $this->limpiarEspaciosEnBlanco($request->request->get('asignaturas'));
-		$cargos = $this->limpiarEspaciosEnBlanco($request->request->get('cargos'));
-		$cursos = $this->limpiarEspaciosEnBlanco($request->request->get('cursos'));
-		$divisiones = $this->limpiarEspaciosEnBlanco($request->request->get('divisiones'));
-		$normas = $this->limpiarEspaciosEnBlanco($request->request->get('normas'));
-		$tipo_estudiantes = $this->limpiarEspaciosEnBlanco($request->request->get('tipoEstudiantes'));
-		$tipo_examenes = $this->limpiarEspaciosEnBlanco($request->request->get('tipoExamenes'));
-		$turnos = $this->limpiarEspaciosEnBlanco($request->request->get('turnos'));
+	    $asignaturas = $request->request->get('asignaturas');
+		$cargos = $request->request->get('cargos');
+		$cursos = $request->request->get('cursos');
+		$divisiones = $request->request->get('divisiones');
+		$normas = $request->request->get('normas');
+		$tipo_estudiantes = $request->request->get('tipoEstudiantes');
+		$tipo_examenes = $request->request->get('tipoExamenes');
+		$turnos = $request->request->get('turnos');
 
-		$asigOK = $this->crearRegistros($doctrine, $asignaturas, 'asignaturas');
-		$cargoOK = $this->crearRegistros($doctrine, $cargos, 'cargos');
-		$cursoOK = $this->crearRegistros($doctrine, $cursos, 'cursos');
-		$divisionOK = $this->crearRegistros($doctrine, $divisiones, 'divisiones');
-		$normaOK = $this->crearRegistros($doctrine, $normas, 'normas');
-		$t_esOK = $this->crearRegistros($doctrine, $tipo_estudiantes, 'tipoEstudiantes');
-		$t_exOK = $this->crearRegistros($doctrine, $tipo_examenes, 'tipoExamenes');
-		$turnoOK = $this->crearRegistros($doctrine, $turnos, 'turnos');
+		if($asignaturas){
+			$asignaturas = $this->limpiarEspaciosEnBlanco($asignaturas);
+			$asigOK = $this->crearRegistros($doctrine, $asignaturas, 'asignaturas');
+		}
+		if($cargos){
+			$cargos = $this->limpiarEspaciosEnBlanco($cargos);
+			$cargoOK = $this->crearRegistros($doctrine, $cargos, 'cargos');
+		}
+		if($cursos){
+			$cursos = $this->limpiarEspaciosEnBlanco($cursos);
+			$cursoOK = $this->crearRegistros($doctrine, $cursos, 'cursos');
+		}
+		if($divisiones){
+			$divisiones = $this->limpiarEspaciosEnBlanco($divisiones);
+			$divisionOK = $this->crearRegistros($doctrine, $divisiones, 'divisiones');
+		}
+		if($normas){
+			$normas = $this->limpiarEspaciosEnBlanco($normas);
+			$normaOK = $this->crearRegistros($doctrine, $normas, 'normas');
+		}
+		if($tipo_estudiantes){
+			$tipo_estudiantes = $this->limpiarEspaciosEnBlanco($tipo_estudiantes);
+			$t_esOK = $this->crearRegistros($doctrine, $tipo_estudiantes, 'tipoEstudiantes');
+		}
+		if($tipo_examenes){
+			$tipo_examenes = $this->limpiarEspaciosEnBlanco($tipo_examenes);
+			$t_exOK = $this->crearRegistros($doctrine, $tipo_examenes, 'tipoExamenes');
+		}
+		if($turnos){
+			$turnos = $this->limpiarEspaciosEnBlanco($turnos);
+			$turnoOK = $this->crearRegistros($doctrine, $turnos, 'turnos');
+		}
 
-		if($asigOK && $cargoOK && $cursoOK && $divisionOK && $normaOK && $t_esOK && $t_exOK && $turnoOK){
-			$response->setContent(json_encode(array('guardado' => true)));
-		}else{
-			$response->setContent(json_encode(array('guardado' => false)));
+		if(isset($asigOK)){
+			if($asigOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($cargoOK)){
+			if($cargoOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($cursoOK)){
+			if($cursoOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($divisionOK)){
+			if($divisionOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($normaOK)){
+			if($normaOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($t_esOK)){
+			if($t_esOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($t_exOK)){
+			if($t_exOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
+		}
+
+		if(isset($turnoOK)){
+			if($turnoOK){
+				$response->setContent(json_encode(array('guardado' => true)));
+			}else{
+				$response->setContent(json_encode(array('guardado' => false)));
+			}
 		}
 
 		return $response;
@@ -137,7 +221,7 @@ class SettingsController extends Controller
 		foreach($array as $item){
 			$arrayNew[] = trim($item);
 		}
-
+		
 		return $arrayNew;
 	}
 

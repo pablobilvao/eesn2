@@ -1,10 +1,14 @@
 $(document).ready(function(){
 	cargarTabla();
+	$("#t-estudiantes").hide();
 });
 
 function cargarTabla(){
 	var html = '';
 	var contenedor = $("#Estudiantes-tbody");
+	if($("#Estudiantes-table_wrapper").length != 0){
+		$('#Estudiantes-table').dataTable().fnDestroy();
+	}
 	contenedor.empty();
 	$.ajax({
 		url: 'getDatosTable',
@@ -14,7 +18,7 @@ function cargarTabla(){
 		success: function(estudiantes){
 			$.each(estudiantes, function(index, value){
 				if(!isNaN(index)){
-					html += '<tr><td>'+index+'</td><td><a pk='+index+' class="edit-able" href="">'+value+'</a></td><td><a class="remove-'+index+'" onclick=eliminarRegistro('+index+'); href="#"><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></a></td>';
+					html += '<tr><td>'+index+'</td><td><a pk='+index+' class="edit-able" >'+value+'</a></td><td><span class="remove-'+index+'" onclick=eliminarRegistro('+index+'); ><img title="eliminar" class="image" src="/bundles/eesn2backend/images/delete.png" /></span><span class="editar-'+index+'" onclick=configurarEditable('+index+'); ><img title="editar" class="image" src="/bundles/eesn2backend/images/edit.png" /></span></td>';
 				}
 			});
 			contenedor.html(html);
@@ -88,30 +92,71 @@ function configurarDataTable(){
 			'width':'50px', 
 		});
 
-	$('.edit-able').editable({
+	//configurarEditable();
+
+	var paginador = $("#Estudiantes-table_paginate");
+	paginador.addClass('pagination pagination-small');
+}
+
+function configurarEditable(id){
+	$('.edit-able[pk='+id+']').addClass('editable-click');
+	$('.edit-able[pk='+id+']').editable({
 	    send: 'never',
 	    success: function(respon, newValue) {
-	    	var pk = traerPK();
 	    	$.ajax({
 	    		url: 'actualizarRegistro',
 				type: 'POST',
 				dataType: 'json',
-				data: {'pk':pk, 'newValue':newValue, entorno: 'Estudiantes'},
+				data: {'pk':id, 'newValue':newValue, entorno: 'Estudiantes'},
 				success: function(res){
 					if(res.mensaje){
 						alertify.success('El registro ha sido actualizado');
 					}else{
 						alertify.error('No se pudo actualizar el registro');
 					}
+					$('.edit-able[pk='+id+']').removeClass('editable-click').css({
+						'cursor':'default',
+						'text-decoration':'none',
+					});
 				}
 	    	});
 	    }        
 	});
-
-	var paginador = $("#Estudiantes-table_paginate");
-	paginador.addClass('pagination pagination-small');
 }
 
-function traerPK(){
-	return $('.editable-open').attr('pk');
-}
+$("#nuevoRegistro").click(function(){
+	$("#t-estudiantes").modal({
+		fadeDuration:500,
+		fadeDelay:.5
+	});
+	$("#cerrar").text('Guardar');
+});
+
+$("#cerrar").click(function(){
+	var cantTEstudiantes = $("#cantT-Estudiantes").val();
+	var tEstudiantes = $("#t-est").val().split(',');
+
+	if(tEstudiantes == 0){
+		alertify.error('Debe Ingresar Al Menos Un Tipo de Estudiante');
+		return false;
+	}
+	if(tEstudiantes.length != cantTEstudiantes){
+		alertify.error('Número de Tipo de Estudiante y Cantidad de Tipos Ingresados son Distintos');
+		return false;
+	}
+
+	$.ajax({
+		url: 'guardarSettings',
+		data: {'tipoEstudiantes': tEstudiantes},
+		type: 'POST',
+		dataType: 'json',
+		success: function(res){
+			if(res.guardado == true){
+				alertify.success("Registro Creado");
+				cargarTabla();
+			}else{
+				alertify.error("Error Al Guardar El Registro");
+			}
+		}
+	});
+});

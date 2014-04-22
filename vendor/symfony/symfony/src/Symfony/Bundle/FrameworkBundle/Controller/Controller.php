@@ -267,43 +267,78 @@ class Controller extends ContainerAware
 
     public function verificarSettings(){
         //session_start();
+        $array = array();
+
         if(!isset($_SESSION['settingsOK'])){
 
             $repositoryAsignaturas = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Asignaturas');
             if(count($repositoryAsignaturas->findAll()) == 0){
-                return false;
+                $array['asignaturas'] = true;
+            }else{
+                $array['asignaturas'] = false;
             }
             $repositoryCargos = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Cargos');
             if(count($repositoryCargos->findAll()) == 0){
-                return false;
+                $array['cargos'] = true;
+            }else{
+                $array['cargos'] = false;
             }
             $repositoryCursos = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Cursos');
             if(count($repositoryCursos->findAll()) == 0){
-                return false;
+                $array['cursos'] = true;
+            }else{
+                $array['cursos'] = false;
             }
             $repositoryDivisiones = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Divisiones');
             if(count($repositoryDivisiones->findAll()) == 0){
-                return false;
+                $array['divisiones'] = true;
+            }else{
+                $array['divisiones'] = false;
             }
             $repositoryNormas = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Normas');
             if(count($repositoryNormas->findAll()) == 0){
-                return false;
+                $array['normas'] = true;
+            }else{
+                $array['normas'] = false;
             }
             $repositoryTipoEstudiantes = $this->getDoctrine()->getRepository('Eesn2BackendBundle:TiposEstudiantes');
             if(count($repositoryTipoEstudiantes->findAll()) == 0){
-                return false;
+                $array['estudiantes'] = true;
+            }else{
+                $array['estudiantes'] = false;
             }
             $repositoryTipoExamenes = $this->getDoctrine()->getRepository('Eesn2BackendBundle:TiposExamenes');
             if(count($repositoryTipoExamenes->findAll()) == 0){
-                return false;
+                $array['examenes'] = true;
+            }else{
+                $array['examenes'] = false;
             }
             $repositoryTurnos = $this->getDoctrine()->getRepository('Eesn2BackendBundle:Turnos');
             if(count($repositoryTurnos->findAll()) == 0){
-                return false;
+                $array['turnos'] = true;
+            }else{
+                $array['turnos'] = false;
             }
         }
-        $_SESSION['settingsOK'] = true; 
 
-        return true;
+        $validado = true;
+
+        foreach ($array as $value) {
+            if($value){
+                $validado = false;
+            }
+        }
+
+        if($validado){
+            $_SESSION['settingsOK'] = true;
+            $array['validado'] = true;
+        }else{
+            $array['validado'] = false;
+        }
+        
+        return $array;
+        
+
+        
     }
 }

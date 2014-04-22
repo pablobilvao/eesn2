@@ -218,7 +218,7 @@ class DefaultController extends Controller
                 $object->setDivision($newValue);
                 break;
             case 'Normas':
-                $object->setNorma($newValue);
+                $object->setNormaLegal($newValue);
                 break;
             case 'Estudiantes':
                 $object->setTipo($newValue);

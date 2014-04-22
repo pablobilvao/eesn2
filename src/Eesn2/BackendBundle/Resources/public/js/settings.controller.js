@@ -1,111 +1,176 @@
 $("#guardar").click(function(){
-	// VARIABLES DE CONFIGURACION
-	var cantAsignaturas = $("#cantAsignaturas").val();
-	var asignaturas = $("#asig").val().split(',');
-	var cantCargos = $("#cantCargos").val();
-	var cargos = $("#carg").val().split(',');
-	var cantCursos = $("#cantCursos").val();
-	var cursos = $("#curs").val().split(',');
-	var cantDivisiones = $("#cantDivisiones").val();
-	var divisiones = $("#divs").val().split(',');
-	var cantNormas = $("#cantNormas").val();
-	var normas = $("#norm").val().split(',');
-	var cant_tipo_estudiantes = $("#cantT-Estudiantes").val();
-	var tipos_estudiantes = $("#t-est").val().split(',');
-	var cant_tipo_examenes = $("#cantT-exam").val();
-	var tipos_examenes = $("#t-exa").val().split(',');
-	var cantTurnos = $("#cantTurnos").val();
-	var turnos = $("#turn").val().split(',');
+	$.each($("#settings").children(), function(index,value){
+		var entorno = $(value).attr('entorno');
+		if(typeof(entorno) != "undefined"){
 
-	//VALIDACIONES DE DATOS
-	var asignaturasOK = validate(cantAsignaturas, asignaturas, 'asignaturas');
-	var cargosOK = validate(cantCargos, cargos, 'cargos');
-	var cursosOK = validate(cantCursos, cursos, 'cursos');
-	var divisionesOK = validate(cantDivisiones, divisiones, 'divisiones');
-	var normasOK = validate(cantNormas, normas, 'normas');
-	var tipoEstudiantesOK = validate(cant_tipo_estudiantes, tipos_estudiantes, 'tipo_de_estudiantes');
-	var tipoExamenesOK = validate(cant_tipo_examenes, tipos_examenes, 'tipo_de_examenes');
-	var turnosOK = validate(cantTurnos, turnos, 'turnos');
-
-	//JSON DE REQUEST
-	var data = armarJSON(asignaturasOK,cargosOK,cursosOK,divisionesOK,normasOK,tipoEstudiantesOK,tipoExamenesOK,turnosOK);
-	if(data['validado']){
-		$("#loading").show();
-		$.ajax({
-			url: 'guardarSettings',
-			data: data,
-			type: 'POST',
-			dataType: 'json',
-			success: function(res){
-				$("#loading").hide();
-				if(res.guardado == true){
-					alertify.success("Se Ha Guardado La Configuración en Base De Datos, Ya Puede Utilizar El Sistema");
-					$(location).attr('href','index');
-				}else{
-					alertify.error("No se pudo guardar la configuración, verifique los datos ingresados");
-				}
+			// VARIABLES DE CONFIGURACION
+			if(entorno == 'asignaturas'){
+				var cantAsignaturas = $("#cantAsignaturas").val();
+				var asignaturas = $("#asig").val().split(',');
 			}
-		});
-	}
+			if(entorno == 'cargos'){
+				var cantCargos = $("#cantCargos").val();
+				var cargos = $("#carg").val().split(',');
+			}
+			if(entorno == 'cursos'){
+				var cantCursos = $("#cantCursos").val();
+				var cursos = $("#curs").val().split(',');
+			}
+			if(entorno == 'divisiones'){
+				var cantDivisiones = $("#cantDivisiones").val();
+				var divisiones = $("#divs").val().split(',');
+			}
+			if(entorno == 'normas'){
+				var cantNormas = $("#cantNormas").val();
+				var normas = $("#norm").val().split(',');
+			}
+			if(entorno == 'estudiantes'){
+				var cant_tipo_estudiantes = $("#cantT-Estudiantes").val();
+				var tipos_estudiantes = $("#t-est").val().split(',');
+			}
+			if(entorno == 'examenes'){
+				var cant_tipo_examenes = $("#cantT-exam").val();
+				var tipos_examenes = $("#t-exa").val().split(',');
+			}
+			if(entorno == 'turnos'){
+				var cantTurnos = $("#cantTurnos").val();
+				var turnos = $("#turn").val().split(',');
+			}
+
+			var validaciones = new Array();
+			//VALIDACIONES DE DATOS
+			if(typeof(asignaturas) != 'undefined'){
+				var asignaturasOK = validate(cantAsignaturas, asignaturas, 'asignaturas');
+				validaciones['asignaturas'] = asignaturasOK;
+			}
+			if(typeof(cargos) != 'undefined'){
+				var cargosOK = validate(cantCargos, cargos, 'cargos');
+				validaciones['cargos'] = cargosOK;
+			}
+			if(typeof(cursos) != 'undefined'){
+				var cursosOK = validate(cantCursos, cursos, 'cursos');
+				validaciones['cursos'] = cursosOK;
+			}
+			if(typeof(divisiones) != 'undefined'){
+				var divisionesOK = validate(cantDivisiones, divisiones, 'divisiones');
+				validaciones['divisiones'] = divisionesOK;
+			}
+			if(typeof(normas) != 'undefined'){
+				var normasOK = validate(cantNormas, normas, 'normas');
+				validaciones['normas'] = normasOK;
+			}
+			if(typeof(tipos_estudiantes) != 'undefined'){
+				var tipoEstudiantesOK = validate(cant_tipo_estudiantes, tipos_estudiantes, 'tipo_de_estudiantes');
+				validaciones['estudiantes'] = tipoEstudiantesOK;
+			}
+			if(typeof(tipos_examenes) != 'undefined'){
+				var tipoExamenesOK = validate(cant_tipo_examenes, tipos_examenes, 'tipo_de_examenes');
+				validaciones['examenes'] = tipoExamenesOK;
+			}
+			if(typeof(turnos) != 'undefined'){
+				var turnosOK = validate(cantTurnos, turnos, 'turnos');
+				validaciones['turnos'] = turnosOK;
+			}
+
+			var data = armarJSON(validaciones);
+
+			//JSON DE REQUEST
+	
+			if(data['validado']){
+				$("#loading").show();
+				$.ajax({
+					url: 'guardarSettings',
+					data: data,
+					type: 'POST',
+					dataType: 'json',
+					success: function(res){
+						$("#loading").hide();
+						if(res.guardado == true){
+							alertify.success("Se Ha Guardado La Configuración en Base De Datos, Ya Puede Utilizar El Sistema");
+							$(location).attr('href','index');
+						}else{
+							alertify.error("No se pudo guardar la configuración, verifique los datos ingresados");
+						}
+					}
+				});
+			}
+		}
+	});
 });
 
-function armarJSON(asignaturasOK,cargosOK,cursosOK,divisionesOK,normasOK,tipoEstudiantesOK,tipoExamenesOK,turnosOK){
+function armarJSON(array){
 	var data = {};
 
-	if(asignaturasOK['bool']){
-		data['asignaturas'] = asignaturasOK['asignaturas'];
-	}else{
-		alertify.error(asignaturasOK['message']);
-		return false;
+	if(typeof(array['asignaturas']) != 'undefined'){
+		if(array['asignaturas']['bool']){
+			data['asignaturas'] = array['asignaturas']['asignaturas'];
+		}else{
+			alertify.error(array['asignaturas']['message']);
+			return false;
+		}
 	}
 
-	if(cargosOK['bool']){
-		data['cargos'] = cargosOK['cargos'];
-	}else{
-		alertify.error(cargosOK['message']);
-		return false;	
+	if(typeof(array['cargos']) != 'undefined'){
+		if( array['cargos']['bool']){
+			data['cargos'] = array['cargos']['cargos'];
+		}else{
+			alertify.error(array['cargos']['message']);
+			return false;	
+		}
 	}
 
-	if(cursosOK['bool']){
-		data['cursos'] = cursosOK['cursos'];
-	}else{
-		alertify.error(cursosOK['message']);
-		return false;
+	if(typeof(array['cursos']) != 'undefined'){
+		if( array['cursos']['bool']){
+			data['cursos'] = array['cursos']['cursos'];
+		}else{
+			alertify.error(array['cursos']['message']);
+			return false;
+		}
 	}
 
-	if(divisionesOK['bool']){
-		data['divisiones'] = divisionesOK['divisiones'];
-	}else{
-		alertify.error(divisionesOK['message']);
-		return false;
+	if(typeof(array['divisiones']) != 'undefined'){
+		if( array['divisiones']['bool']){
+			data['divisiones'] = array['divisiones']['divisiones'];
+		}else{
+			alertify.error(array['divisiones']['message']);
+			return false;
+		}
 	}
 
-	if(normasOK['bool']){
-		data['normas'] = normasOK['normas'];
-	}else{
-		alertify.error(normasOK['message']);
-		return false;
+	if(typeof(array['normas']) != 'undefined'){
+		if( array['normas']['bool']){
+			data['normas'] = array['normas']['normas'];
+		}else{
+			alertify.error(array['normas']['message']);
+			return false;
+		}
 	}
 
-	if(tipoEstudiantesOK['bool']){
-		data['tipoEstudiantes'] = tipoEstudiantesOK['tipo_de_estudiantes'];
-	}else{
-		alertify.error(tipoEstudiantesOK['message']);
-		return false;
+	if(typeof(array['estudiantes']) != 'undefined'){
+		if( array['estudiantes']['bool']){
+			data['tipoEstudiantes'] = array['estudiantes']['tipo_de_estudiantes'];
+		}else{
+			alertify.error(array['estudiantes']['message']);
+			return false;
+		}
 	}
 
-	if(tipoExamenesOK['bool']){
-		data['tipoExamenes'] = tipoExamenesOK['tipo_de_examenes'];
-	}else{
-		alertify.error(tipoExamenesOK['message']);
-		return false;
+	if(typeof(array['examenes']) != 'undefined'){
+		if( array['examenes']['bool']){
+			data['tipoExamenes'] = array['examenes']['tipo_de_examenes'];
+		}else{
+			alertify.error(array['examenes']['message']);
+			return false;
+		}
 	}
 
-	if(turnosOK['bool']){
-		data['turnos'] = turnosOK['turnos'];
-	}else{
-		alertify.error(turnosOK['message']);
-		return false;
+	if(typeof(array['turnos']) != 'undefined'){
+		if( array['turnos']['bool']){
+			data['turnos'] = array['turnos']['turnos'];
+		}else{
+			alertify.error(array['turnos']['message']);
+			return false;
+		}
 	}
 	data['validado'] = true;
 	return data;
